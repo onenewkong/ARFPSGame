@@ -8,7 +8,6 @@ using UnityEngine.XR.ARSubsystems;
 public class MonsterManager : MonoBehaviour
 {
     ARRaycastManager arManager;
-    public GameObject indicator;
 
     public List<GameObject> monsterObjectPool;
     private BoxCollider area;
@@ -27,8 +26,6 @@ public class MonsterManager : MonoBehaviour
         area.enabled = false;
 
         StopAllCoroutines();
-
-        // DetectGround();
 
        for(int i = 0; i < count; i++)
        {
@@ -51,7 +48,7 @@ public class MonsterManager : MonoBehaviour
         float posY = basePosition.y + UnityEngine.Random.Range(-size.y/2f, size.y/2f);
         float posZ = basePosition.z + UnityEngine.Random.Range(-size.z/2f, size.z/2f);
 
-        Vector3 spawnPos = new Vector3(posX, posY, posZ);
+        Vector3 spawnPos = new Vector3(posX/2f, posY/2f, posZ/2f);
 
         return spawnPos;
     }
@@ -62,6 +59,7 @@ public class MonsterManager : MonoBehaviour
 
         int index = UnityEngine.Random.Range(0, monsterObjectPool.Count);
         GameObject selectedPrefab = monsterObjectPool[index];
+
         if(selectedPrefab.activeSelf == false)
         {
             selectedPrefab.SetActive(true);
@@ -83,26 +81,4 @@ public class MonsterManager : MonoBehaviour
         monsterObjectPool.Add(monster2);
         monsterObjectPool.Add(monster3);
     }
-    /*
-    void DetectGround()
-    {
-        Vector2 screenSize = new Vector2(Screen.width * 0.5f, Screen.height * 0.5f);
-
-        List<ARRaycastHit> hitInfos = new List<ARRaycastHit>();
-
-        if (arManager.Raycast(screenSize, hitInfos, TrackableType.Planes))
-        {
-            indicator.SetActive(true);
-
-            indicator.transform.position = hitInfos[0].pose.position;
-            indicator.transform.rotation = hitInfos[0].pose.rotation;
-
-            indicator.transform.position += indicator.transform.up * 0.01f;
-        }
-
-        else
-        {
-            indicator.SetActive(false);
-        }
-    }*/
 }

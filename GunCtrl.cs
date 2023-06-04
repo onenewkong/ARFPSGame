@@ -48,7 +48,8 @@ public class GunCtrl : MonoBehaviour
                 {
                     UsingBullet.SetActive(true);
                     UsingBullet.transform.position = firePosition.transform.position;
-                    UsingBullet.GetComponent<Rigidbody>().AddForce(transform.forward * (35f), ForceMode.Impulse);
+                    
+                    UsingBullet.GetComponent<Rigidbody>().AddForce(transform.forward*(35f), ForceMode.Impulse);
 
                     gameObject.GetComponent<AudioSource>().Play();
                 }

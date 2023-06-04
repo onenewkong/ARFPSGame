@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
         {
             gameLabel.SetActive(true);
             gameText.text = "Game Over";
-            gameText.color = new Color32(255, 0, 0, 255);
+            gameText.color = new Color32(255, 255, 255, 255);
             gState = GameState.GameOver;
         }
     }

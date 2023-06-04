@@ -1,10 +1,12 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Monster : MonoBehaviour
 {
     public GameObject monster;
     public GameObject target;
+    public Animator animator;
 
     public float speed = 4f;
 
@@ -14,6 +16,8 @@ public class Monster : MonoBehaviour
 
     void Start()
     {
+        animator = GetComponent<Animator>();
+
         int randValue = UnityEngine.Random.Range(0, 10);
 
         if (randValue < 3)
@@ -57,9 +61,19 @@ public class Monster : MonoBehaviour
 
         else if (collision.collider.CompareTag("Bullet"))
         {
-            this.gameObject.SetActive(false);
-            ScoreManager.Instance.AddScore(5);
+            this.animator.SetTrigger("Die");
+            KilledUIManager.killedInstance.KilledMonster();
 
+            StartCoroutine(Die());
         }
+    }
+
+    private IEnumerator Die()
+    {
+        yield return new WaitForSecondsRealtime(1.7f);
+        this.gameObject.SetActive(false);
+        ScoreManager.Instance.AddScore(5);
+        BloodCtrl.bloodInstance.blood.transform.position = gameObject.transform.position; 
+        BloodCtrl.bloodInstance.blood.SetActive(true);
     }
 }
