@@ -20,7 +20,7 @@ public class KilledUIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("TextNull", 2, 3);
+        InvokeRepeating("TextNull", 1, 1);
     }
 
     // Update is called once per frame
